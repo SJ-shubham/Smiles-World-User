@@ -1,0 +1,246 @@
+/**
+ * API Endpoint Test File
+ * 
+ * This file contains example requests to test all user API endpoints.
+ * You can use these with REST clients like Postman, Thunder Client, or REST Client VS Code extension.
+ * 
+ * Base URL: http://localhost:5000/api/user
+ */
+
+// =====================================================
+// HEALTH CHECK
+// =====================================================
+
+### Health Check
+GET http://localhost:5000/api/user/health
+
+
+// =====================================================
+// PACKAGES API
+// =====================================================
+
+### Get All Packages
+GET http://localhost:5000/api/user/packages
+
+### Get Packages - Domestic Only
+GET http://localhost:5000/api/user/packages?tag=domestic
+
+### Get Packages - International Only
+GET http://localhost:5000/api/user/packages?tag=international
+
+### Get Featured Packages
+GET http://localhost:5000/api/user/packages/featured
+
+### Get Featured Packages - Limit 3
+GET http://localhost:5000/api/user/packages/featured?limit=3
+
+### Get Women-Only Packages
+GET http://localhost:5000/api/user/packages/women-only
+
+### Get Women-Only Packages - Domestic
+GET http://localhost:5000/api/user/packages/women-only?tag=domestic
+
+### Get Group Departure Packages
+GET http://localhost:5000/api/user/packages/group-departure
+
+### Get Group Departure Packages - International
+GET http://localhost:5000/api/user/packages/group-departure?tag=international
+
+### Get Package by ID (Replace with actual ID)
+GET http://localhost:5000/api/user/packages/YOUR_PACKAGE_ID_HERE
+
+
+// =====================================================
+// PAGES API
+// =====================================================
+
+### Get Home Page Content
+GET http://localhost:5000/api/user/pages/home
+
+### Get About Page Content
+GET http://localhost:5000/api/user/pages/about
+
+### Get Women Travel Page Content
+GET http://localhost:5000/api/user/pages/women-travel
+
+### Get Group Departures Page Content
+GET http://localhost:5000/api/user/pages/group-departures
+
+### Get Contact Page Content
+GET http://localhost:5000/api/user/pages/contact
+
+
+// =====================================================
+// BLOGS API
+// =====================================================
+
+### Get All Blogs
+GET http://localhost:5000/api/user/blogs
+
+### Get Blog by ID (Replace with actual ID)
+GET http://localhost:5000/api/user/blogs/YOUR_BLOG_ID_HERE
+
+
+// =====================================================
+// PODCASTS API
+// =====================================================
+
+### Get All Podcasts
+GET http://localhost:5000/api/user/podcasts
+
+### Get Podcast by ID (Replace with actual ID)
+GET http://localhost:5000/api/user/podcasts/YOUR_PODCAST_ID_HERE
+
+
+// =====================================================
+// FORMS API - MESSAGES
+// =====================================================
+
+### Submit Contact Message - Valid
+POST http://localhost:5000/api/user/messages
+Content-Type: application/json
+
+{
+  "fullName": "John Doe",
+  "emailAddress": "john.doe@example.com",
+  "phoneNumber": "+91-9876543210",
+  "subject": "Inquiry about Dubai Package",
+  "message": "I would like to know more details about the Dubai luxury package. What are the accommodation options available?"
+}
+
+### Submit Contact Message - Invalid Email (Should Fail)
+POST http://localhost:5000/api/user/messages
+Content-Type: application/json
+
+{
+  "fullName": "Jane Smith",
+  "emailAddress": "invalid-email",
+  "phoneNumber": "+91-9876543210",
+  "subject": "Test Subject",
+  "message": "Test message"
+}
+
+### Submit Contact Message - Missing Required Fields (Should Fail)
+POST http://localhost:5000/api/user/messages
+Content-Type: application/json
+
+{
+  "fullName": "Test User",
+  "emailAddress": "test@example.com"
+}
+
+
+// =====================================================
+// FORMS API - ENQUIRIES
+// =====================================================
+
+### Submit Package Enquiry - Valid
+POST http://localhost:5000/api/user/enquiries
+Content-Type: application/json
+
+{
+  "type": "Package Enquiry",
+  "fullName": "Alice Johnson",
+  "emailAddress": "alice@example.com",
+  "phoneNumber": "+91-9876543210",
+  "packageId": "64abc123def456789abc1234",
+  "numberOfTravelers": 4,
+  "subject": "Group Booking for Goa",
+  "message": "We are a group of 4 friends looking to book the Goa beach package for next month."
+}
+
+### Submit Custom Package Enquiry
+POST http://localhost:5000/api/user/enquiries
+Content-Type: application/json
+
+{
+  "type": "Custom Package",
+  "fullName": "Bob Williams",
+  "emailAddress": "bob@example.com",
+  "phoneNumber": "+91-9123456789",
+  "numberOfTravelers": 2,
+  "subject": "Custom Honeymoon Package",
+  "message": "Looking for a romantic honeymoon package to Maldives for 7 days in December."
+}
+
+### Submit Women Travel Enquiry
+POST http://localhost:5000/api/user/enquiries
+Content-Type: application/json
+
+{
+  "type": "Women Travel",
+  "fullName": "Priya Sharma",
+  "emailAddress": "priya@example.com",
+  "phoneNumber": "+91-9988776655",
+  "numberOfTravelers": 3,
+  "message": "Interested in women-only group tour to Rajasthan."
+}
+
+### Submit Enquiry - Invalid Email (Should Fail)
+POST http://localhost:5000/api/user/enquiries
+Content-Type: application/json
+
+{
+  "type": "Package Enquiry",
+  "fullName": "Test User",
+  "emailAddress": "not-an-email",
+  "phoneNumber": "+91-9876543210"
+}
+
+### Submit Enquiry - Missing Required Fields (Should Fail)
+POST http://localhost:5000/api/user/enquiries
+Content-Type: application/json
+
+{
+  "fullName": "Test User"
+}
+
+
+// =====================================================
+// ERROR CASES
+// =====================================================
+
+### Invalid Package ID Format
+GET http://localhost:5000/api/user/packages/invalid-id
+
+### Non-existent Package ID
+GET http://localhost:5000/api/user/packages/123456789012345678901234
+
+### Invalid Blog ID Format
+GET http://localhost:5000/api/user/blogs/not-a-valid-id
+
+### Non-existent Route (Should return 404)
+GET http://localhost:5000/api/user/nonexistent-route
+
+
+// =====================================================
+// TESTING NOTES
+// =====================================================
+
+/*
+To use this file:
+
+1. Install REST Client extension in VS Code
+2. Open this file in VS Code
+3. Click "Send Request" above any request
+4. View responses in the side panel
+
+OR
+
+1. Copy individual requests to Postman/Thunder Client
+2. Replace placeholders (YOUR_PACKAGE_ID_HERE) with actual IDs from your database
+3. Test each endpoint
+
+Expected Results:
+- All GET requests should return 200 with data
+- Valid POST requests should return 201 with success message
+- Invalid requests should return 400 with error details
+- Non-existent resources should return 404
+- Invalid IDs should return 400
+
+Before Testing:
+1. Ensure MongoDB is running
+2. Ensure server is running on port 5000 (or update URLs)
+3. Ensure database has some sample data
+4. Update placeholder IDs with actual IDs from your database
+*/
